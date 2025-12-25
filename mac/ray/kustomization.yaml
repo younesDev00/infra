@@ -3,5 +3,4 @@ kind: Kustomization
 
 # These are the files Kustomize will process and Flux will apply
 resources:
-  - s3.yaml
-  - ./ray
+  - ray-pyspy.yaml

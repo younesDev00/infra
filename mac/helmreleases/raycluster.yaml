@@ -20,13 +20,5 @@ spec:
         name: flux-system
         namespace: flux-system
       interval: 5m
-  valuesFrom:
-  - kind: ConfigMap
-    name: raycluster-values
-    valuesKey: values.yaml
-    targetPath: ""  # Load entire values.yaml
-  # Optional inline values override ConfigMap
-  values:
-    worker:
-      minReplicas: 1
-      maxReplicas: 5
+  valuesFiles:
+    - ./values.yaml  # Relative path from the HelmRelease file

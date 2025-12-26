@@ -5,3 +5,10 @@ kind: Kustomization
 resources:
   # - ./ray/
   - helmreleases/raycluster.yaml
+
+configMapGenerator:
+- name: raycluster-values
+  files:
+    - values.yaml=configs/raycluster-values.yaml
+  options:
+    disableNameSuffixHash: true  # Keep name stable

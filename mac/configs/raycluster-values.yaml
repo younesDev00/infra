@@ -1,15 +1,125 @@
-# clusters/dev/configs/raycluster-values.yaml (plain values file)
+
+
 image:
   repository: rayproject/ray
-  tag: "2.52.0"
+  tag: 2.52.0
+  pullPolicy: IfNotPresent
+
+nameOverride: "kuberay"
+
+fullnameOverride: ""
+
+imagePullSecrets: []
+
+gcsFaultTolerance:
+  enabled: false
+common:
+  containerEnv: []
 head:
-  resources:
-    limits:
-      cpu: "2"
-      memory: "4G"
-worker:
-  replicas: 2
+  initContainers: []
+  labels: {}
+  serviceAccountName: ""
+  restartPolicy: ""
+  runtimeClassName: ""
+  containerEnv: []
+  envFrom: []
   resources:
     limits:
       cpu: "1"
       memory: "2G"
+    requests:
+      cpu: "1"
+      memory: "2G"
+  resourceClaims: []
+  annotations: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podSecurityContext: {}
+  securityContext: {}
+  volumes:
+    - name: log-volume
+      emptyDir: {}
+  volumeMounts:
+    - mountPath: /tmp/ray
+      name: log-volume
+  sidecarContainers: []
+  command: []
+  args: []
+  headService: {}
+  topologySpreadConstraints: []
+  rayStartParams: {}
+worker:
+  groupName: workergroup
+  replicas: 1
+  minReplicas: 1
+  maxReplicas: 3
+  labels: {}
+  serviceAccountName: ""
+  restartPolicy: ""
+  runtimeClassName: ""
+  initContainers: []
+  containerEnv: []
+  envFrom: []
+  resources:
+    limits:
+      cpu: "1"
+      memory: "1G"
+    requests:
+      cpu: "1"
+      memory: "1G"
+  resourceClaims: []
+  annotations: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podSecurityContext: {}
+  securityContext: {}
+  volumes:
+    - name: log-volume
+      emptyDir: {}
+  volumeMounts:
+    - mountPath: /tmp/ray
+      name: log-volume
+  sidecarContainers: []
+  command: []
+  args: []
+  topologySpreadConstraints: []
+  rayStartParams: {}
+additionalWorkerGroups:
+  smallGroup:
+    disabled: true
+    replicas: 0
+    minReplicas: 0
+    maxReplicas: 3
+    labels: {}
+    serviceAccountName: ""
+    restartPolicy: ""
+    runtimeClassName: ""
+    containerEnv: []
+    envFrom: []
+    resources:
+      limits:
+        cpu: 1
+        memory: "1G"
+      requests:
+        cpu: 1
+        memory: "1G"
+    resourceClaims: []
+    annotations: {}
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
+    podSecurityContext: {}
+    securityContext: {}
+    volumes:
+      - name: log-volume
+        emptyDir: {}
+    volumeMounts:
+      - mountPath: /tmp/ray
+        name: log-volume
+    sidecarContainers: []
+    command: []
+    args: []
+    topologySpreadConstraints: []
+    rayStartParams: {}

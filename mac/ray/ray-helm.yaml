@@ -1,0 +1,28 @@
+# raycluster-helmrelease.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: raycluster
+  namespace: default
+spec:
+  interval: 5m
+  releaseName: raycluster  # Optional: custom release name
+  targetNamespace: default
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  chart:
+    spec:
+      chart: ../../helm/ray-cluster
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+      interval: 1m
+  valuesFrom:
+  - kind: ConfigMap
+    name: raycluster-values
+    valuesKey: values.yaml

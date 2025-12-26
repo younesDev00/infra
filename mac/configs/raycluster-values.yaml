@@ -1,0 +1,21 @@
+# clusters/dev/configs/raycluster-values.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: raycluster-values
+  namespace: default
+data:
+  values.yaml: |
+    image:
+      tag: "2.52.0"
+    head:
+      resources:
+        limits:
+          cpu: "2"
+          memory: "4G"
+    worker:
+      replicas: 2
+      resources:
+        limits:
+          cpu: "1"
+          memory: "2G"

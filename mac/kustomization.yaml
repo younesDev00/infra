@@ -3,4 +3,6 @@ kind: Kustomization
 
 # These are the files Kustomize will process and Flux will apply
 resources:
-  - ./ray/
+  # - ./ray/
+  - helmreleases/raycluster.yaml
+  - configs/raycluster-values.yaml
